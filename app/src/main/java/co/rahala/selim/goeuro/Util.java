@@ -33,6 +33,8 @@ public class Util extends Application{
     private static ArrayList<PlaceDistance> placeDistanceArrayList = new ArrayList<>();
 
     public static final int DATE_DIALOG_ID = 0;
+    private static String  currentLocale;
+
 
 
 
@@ -40,7 +42,9 @@ public class Util extends Application{
     public void onCreate() {
         super.onCreate();
         mylocation = Util.getLocation(this);
-        Log.d(TAG, "loccc"+mylocation.toString());
+        currentLocale = getResources().getConfiguration().locale.toString();
+
+        Log.d(TAG, "loccc"+ currentLocale);
     }
 
 
@@ -57,10 +61,7 @@ public class Util extends Application{
         strings.clear();
         placeDistanceArrayList.clear();
 
-
-
-
-        APIClient.getsApiInterface().getPlaces("de", place, new Callback<List<Place>>() {
+        APIClient.getsApiInterface().getPlaces(currentLocale, place, new Callback<List<Place>>() {
             @Override
             public void success(List<Place> places, Response response) {
 
@@ -71,10 +72,8 @@ public class Util extends Application{
                     nearestPlace = new LatLng(place1.getGeo_position().getLatitude(), place1.getGeo_position().getLongitude());
                     distance = getDistanceInMetres(mylocation, nearestPlace);
                     placeDistanceArrayList.add(new PlaceDistance(place1.getName(), distance));
-
                     Log.d(TAG, "distances= " + place1.getName() + " " + distance);
                 }
-
                 placeDistanceArrayList = sortByDistance(placeDistanceArrayList);
                 Log.d(TAG, "placeDistanceArrayList =" + placeDistanceArrayList);
 
@@ -83,8 +82,6 @@ public class Util extends Application{
                 }
 
                 Util.getEventBus().post(new StringsEvent(strings));
-
-
             }
 
             @Override
