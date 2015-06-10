@@ -9,6 +9,8 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import co.rahala.selim.goeuro.events.StringsEvent;
@@ -77,10 +79,9 @@ public class Util extends Application{
 
                     Log.d(TAG, "distances= " + place1.getName() + " " + distance);
 
-
-
                 }
 
+                placeDistanceArrayList = sortByDistance(placeDistanceArrayList);
 
 
                 Log.d(TAG, "placeDistanceArrayList =" + placeDistanceArrayList);
@@ -110,22 +111,21 @@ public class Util extends Application{
 
 
 
-/*
 
-    public static ArrayList<CareGiver> sortByDistance(ArrayList<CareGiver> careGivers) {
+    public static ArrayList<PlaceDistance> sortByDistance(ArrayList<PlaceDistance> placeDistances) {
 
-        Collections.sort(careGivers, new travelDistanceComparator());
+        Collections.sort(placeDistances, new travelDistanceComparator());
 
-        return careGivers;
+        return placeDistances;
     }
 
-    private static class travelDistanceComparator implements Comparator<CareGiver> {
+    private static class travelDistanceComparator implements Comparator<PlaceDistance> {
         @Override
-        public int compare(CareGiver o1, CareGiver o2) {
-            return (int) Math.signum(o1.getTravelDistance() - o2.getTravelDistance());
+        public int compare(PlaceDistance lhs, PlaceDistance rhs) {
+            return (int) Math.signum(lhs.getDistance() - rhs.getDistance());
         }
+
     }
-*/
 
     public static LatLng getLocation(Context context) {
 
