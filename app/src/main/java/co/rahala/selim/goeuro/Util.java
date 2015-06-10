@@ -32,6 +32,9 @@ public class Util extends Application{
     private static ArrayList<String> strings = new ArrayList<>();
     private static ArrayList<PlaceDistance> placeDistanceArrayList = new ArrayList<>();
 
+    public static final int DATE_DIALOG_ID = 0;
+
+
 
     @Override
     public void onCreate() {
@@ -53,6 +56,8 @@ public class Util extends Application{
     public static ArrayList<String> getPlaces(final String place) {
         strings.clear();
         placeDistanceArrayList.clear();
+
+
 
 
         APIClient.getsApiInterface().getPlaces("de", place, new Callback<List<Place>>() {
