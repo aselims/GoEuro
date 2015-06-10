@@ -13,6 +13,7 @@ import java.util.List;
 
 import co.rahala.selim.goeuro.events.StringsEvent;
 import co.rahala.selim.goeuro.models.Place;
+import co.rahala.selim.goeuro.models.PlaceDistance;
 import co.rahala.selim.goeuro.networking.APIClient;
 import de.greenrobot.event.EventBus;
 import retrofit.Callback;
@@ -28,6 +29,7 @@ public class Util extends Application{
     private static final String TAG = Util.class.getSimpleName();
     public static ArrayList<Place> suggestedPlaces = new ArrayList<>();
     public static ArrayList<String> strings = new ArrayList<>();
+    private static ArrayList<PlaceDistance> placeDistanceArrayList = new ArrayList<>();
 
 
 
@@ -56,6 +58,7 @@ public class Util extends Application{
     public static ArrayList<String> getPlaces(final String place) {
         suggestedPlaces.clear();
         strings.clear();
+        placeDistanceArrayList.clear();
 
 
         APIClient.getsApiInterface().getPlaces("de", place, new Callback<List<Place>>() {
@@ -70,6 +73,7 @@ public class Util extends Application{
                     nearestPlace = new LatLng(place1.getGeo_position().getLatitude(), place1.getGeo_position().getLongitude());
 
                     distance = getDistanceInMetres(mylocation, nearestPlace);
+                    placeDistanceArrayList.add(new PlaceDistance(place1.getName(), distance));
 
                     Log.d(TAG, "distances= " + place1.getName() + " " + distance);
 
@@ -78,11 +82,13 @@ public class Util extends Application{
                 }
 
 
-                for(Place place : places){
-                    strings.add(place.getName());
+
+                Log.d(TAG, "placeDistanceArrayList =" + placeDistanceArrayList);
+
+                for(PlaceDistance placeDistance : placeDistanceArrayList){
+                    strings.add(placeDistance.getName());
                 }
 
-                Log.d(TAG, "getPlacesStrings =" + strings);
                 Util.getEventBus().post(new StringsEvent(strings));
 
 

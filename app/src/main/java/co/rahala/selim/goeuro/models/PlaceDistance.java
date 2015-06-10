@@ -3,11 +3,11 @@ package co.rahala.selim.goeuro.models;
 /**
  * Created by aselims on 10/06/15.
  */
-public class FinalPlaces {
+public class PlaceDistance {
     private String name;
     private float distance;
 
-    public FinalPlaces(String name, float distance) {
+    public PlaceDistance(String name, float distance) {
         this.name = name;
         this.distance = distance;
     }
