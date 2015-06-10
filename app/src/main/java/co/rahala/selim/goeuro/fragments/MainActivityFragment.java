@@ -50,10 +50,13 @@ public class MainActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //autocompleteView.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.autocomplete_list_item));
+        //autocompleteView.setAdapter(new PlacesAdapter(getActivity(), R.layout.autocomplete_list_item));
 
         textViewFrom.setAdapter(new PlacesAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line));
         textViewFrom.setThreshold(2);
+
+        textViewTo.setAdapter(new PlacesAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line));
+        textViewTo.setThreshold(2);
 
         buttonSelectDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
