@@ -29,11 +29,8 @@ public class Util extends Application{
 
     private static LatLng mylocation;
     private static final String TAG = Util.class.getSimpleName();
-    public static ArrayList<Place> suggestedPlaces = new ArrayList<>();
-    public static ArrayList<String> strings = new ArrayList<>();
+    private static ArrayList<String> strings = new ArrayList<>();
     private static ArrayList<PlaceDistance> placeDistanceArrayList = new ArrayList<>();
-
-
 
 
     @Override
@@ -41,11 +38,7 @@ public class Util extends Application{
         super.onCreate();
         mylocation = Util.getLocation(this);
         Log.d(TAG, "loccc"+mylocation.toString());
-
-
     }
-
-
 
 
     private static EventBus eventBus;
@@ -58,7 +51,6 @@ public class Util extends Application{
 
 
     public static ArrayList<String> getPlaces(final String place) {
-        suggestedPlaces.clear();
         strings.clear();
         placeDistanceArrayList.clear();
 
@@ -66,24 +58,19 @@ public class Util extends Application{
         APIClient.getsApiInterface().getPlaces("de", place, new Callback<List<Place>>() {
             @Override
             public void success(List<Place> places, Response response) {
-                suggestedPlaces.addAll(places);
 
                 LatLng nearestPlace;
                 float distance = 0;
 
                 for(Place place1 : places){
                     nearestPlace = new LatLng(place1.getGeo_position().getLatitude(), place1.getGeo_position().getLongitude());
-
                     distance = getDistanceInMetres(mylocation, nearestPlace);
                     placeDistanceArrayList.add(new PlaceDistance(place1.getName(), distance));
 
                     Log.d(TAG, "distances= " + place1.getName() + " " + distance);
-
                 }
 
                 placeDistanceArrayList = sortByDistance(placeDistanceArrayList);
-
-
                 Log.d(TAG, "placeDistanceArrayList =" + placeDistanceArrayList);
 
                 for(PlaceDistance placeDistance : placeDistanceArrayList){
@@ -107,10 +94,6 @@ public class Util extends Application{
         return strings;
 
     }
-
-
-
-
 
     public static ArrayList<PlaceDistance> sortByDistance(ArrayList<PlaceDistance> placeDistances) {
 
