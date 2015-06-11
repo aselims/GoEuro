@@ -109,7 +109,7 @@ public class MainActivityFragment extends Fragment {
 
     private boolean isValidForm(AutoCompleteTextView textView) {
         if (PlacesAdapter.placesStringsList == null ||!(PlacesAdapter.placesStringsList.size() > 0) || !PlacesAdapter.placesStringsList.contains(textView.getText().toString())) {
-            Toast.makeText(getActivity(), "valid country plz", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Not valid!", Toast.LENGTH_SHORT).show();
             return false;
 
         }
