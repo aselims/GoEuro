@@ -130,6 +130,7 @@ public class MainActivityFragment extends Fragment {
 
     public void onEvent(Transporter transporter) {
         textViewDate.setText(transporter.getString());
+        textViewDate.setVisibility(View.VISIBLE);
         if (!textViewDate.getText().equals("")) {
             checks[2] = true;
 
