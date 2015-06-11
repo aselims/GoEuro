@@ -17,7 +17,7 @@ import co.rahala.selim.goeuro.events.StringsEvent;
 public class PlacesAdapter extends ArrayAdapter<String> implements Filterable{
 
     private static final String TAG = PlacesAdapter.class.getSimpleName();
-     private static List<String> placesStringsList;
+    public static List<String> placesStringsList;
     private Context mContext;
     int res;
 
