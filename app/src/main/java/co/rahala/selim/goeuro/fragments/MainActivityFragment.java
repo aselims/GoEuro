@@ -61,7 +61,7 @@ public class MainActivityFragment extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 checks[0] = true;
                 if (!hasFocus) {
-                    if (!isValidForm()) {
+                    if (!isValidForm(textViewFrom)) {
                         textViewFrom.setError("Not valid!");
                         checks[0] = false;
 
@@ -80,7 +80,7 @@ public class MainActivityFragment extends Fragment {
                 checks[1] = true;
 
                 if (!hasFocus) {
-                    if (!isValidForm()) {
+                    if (!isValidForm(textViewTo)) {
                         textViewTo.setError("Not valid!");
                         checks[1] = false;
 
@@ -97,11 +97,18 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
+        buttonFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Search is not yet implemented!", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
 
-    private boolean isValidForm() {
-        if (!(PlacesAdapter.placesStringsList.size() > 0) || !PlacesAdapter.placesStringsList.contains(textViewFrom.getText().toString()) || textViewFrom.getText() == null) {
+    private boolean isValidForm(AutoCompleteTextView textView) {
+        if (PlacesAdapter.placesStringsList == null ||!(PlacesAdapter.placesStringsList.size() > 0) || !PlacesAdapter.placesStringsList.contains(textView.getText().toString())) {
             Toast.makeText(getActivity(), "valid country plz", Toast.LENGTH_SHORT).show();
             return false;
 
